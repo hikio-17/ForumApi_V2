@@ -1,0 +1,27 @@
+{
+   "env": {
+       "es2021": true,
+       "node": true
+   },
+   "extends": [
+       "airbnb-base"
+   ],
+   "parserOptions": {
+       "ecmaVersion": 2020
+   },
+   "rules": {
+       "no-console": "off",
+       "linebreak-style": "off",
+       "no-underscore-dangle": "off",
+       "camelcase": "off",
+       "no-await-in-loop": "off",
+       "no-unreachable-loop": "off",
+       "no-plusplus": "off",
+       "max-len":"off",
+       "class-methods-use-this": "off",
+       "array-callback-return": "off",
+       "import/no-extraneous-dependencies": "off",
+       "no-unused-vars":"off",
+       "no-undef": "off"
+   }
+}
