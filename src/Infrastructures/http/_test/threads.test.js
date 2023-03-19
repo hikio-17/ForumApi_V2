@@ -3,8 +3,6 @@ const ThreadsTableTestHandler = require('../../../../tests/ThreadsTableTestHelpe
 const createServer = require('../createServer');
 const container = require('../../container');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
-const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper');
 
 describe('/threads endpoint', () => {
   // create variable global
