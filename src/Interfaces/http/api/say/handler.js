@@ -4,9 +4,10 @@ class SayHandler {
   }
 
   async getSayHandler(request, h) {
-    return {
+    const response = h.response({
       value: 'Hello world!',
-    };
+    });
+    return response;
   }
 }
 
