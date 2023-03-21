@@ -8,7 +8,7 @@ describe('AddLikeCommentUseCase', () => {
     const credentialId = true;
 
     const commentRepository = new CommentRepository();
-    const addLikeComentUseCase = new AddLikeCommentUseCase(commentRepository);
+    const addLikeComentUseCase = new AddLikeCommentUseCase({ commentRepository });
 
     // Action & Assert
     await expect(addLikeComentUseCase.execute(commentId, credentialId)).rejects.toThrowError('ADD_LIKE_COMMENT_USE_CASE_NOT_MEET_DATA_TYPE_SPESIFICATION');
@@ -23,7 +23,7 @@ describe('AddLikeCommentUseCase', () => {
     const mockCommentRepository = new CommentRepository();
 
     // mocking needed function
-    mockCommentRepository.likesComents = jest.fn(() => Promise.resolve());
+    mockCommentRepository.likesComments = jest.fn(() => Promise.resolve());
 
     // creating use case instance
     const getAddLikeCommentUseCase = new AddLikeCommentUseCase({
@@ -34,6 +34,6 @@ describe('AddLikeCommentUseCase', () => {
     await getAddLikeCommentUseCase.execute(commentId, credentialId);
 
     // Assert
-    expect(mockCommentRepository.likesComents).toBeCalledWith(commentId, credentialId);
+    expect(mockCommentRepository.likesComments).toBeCalledWith(commentId, credentialId);
   });
 });
