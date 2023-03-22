@@ -53,6 +53,7 @@ describe('CommentToModel entities', () => {
       created_at: '2023',
       content: 'sebuah comment',
       is_delete: false,
+      likes: null,
     };
 
     const contentTrueDelete = {
@@ -61,6 +62,7 @@ describe('CommentToModel entities', () => {
       created_at: '2023',
       content: 'sebuah comment',
       is_delete: true,
+      likes: ['user-1234'],
     };
 
     // Action
@@ -74,6 +76,7 @@ describe('CommentToModel entities', () => {
       date: '2023',
       content: 'sebuah comment',
       replies: [],
+      likeCount: 0,
     });
     expect(commentToModelTrueDelete).toEqual({
       id: 'comment-123',
@@ -81,6 +84,7 @@ describe('CommentToModel entities', () => {
       date: '2023',
       content: '**komentar telah dihapus**',
       replies: [],
+      likeCount: 1,
     });
   });
 });

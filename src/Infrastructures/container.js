@@ -29,10 +29,11 @@ const RefreshAuthenticationUseCase = require('../Applications/use_case/RefreshAu
 const AddCommentUseCase = require('../Applications/use_case/AddCommentUseCase');
 const DeleteCommentUseCase = require('../Applications/use_case/DeleteComentUseCase');
 const AddNewReplyCommentUseCase = require('../Applications/use_case/AddNewReplyCommentUseCase');
-
 const AddThreadUseCase = require('../Applications/use_case/AddThreadsUserCase');
 const GetThreadUseCase = require('../Applications/use_case/GetThreadUseCase');
 const DeleteReplyCommentUseCase = require('../Applications/use_case/DeleteReplyCommentUseCase');
+const AddLikeCommentUseCase = require('../Applications/use_case/AddLikeComentUseCase');
+
 const CommentRepository = require('../Domains/comments/CommentRepository');
 const CommentRepositoryPostgres = require('./repository/CommentRepositoryPostgres');
 const ReplyRepository = require('../Domains/replies/ReplyRepository');
@@ -293,6 +294,23 @@ container.register([
         {
           name: 'replyRepository',
           internal: ReplyRepository.name,
+        },
+      ],
+    },
+  },
+  {
+    key: AddLikeCommentUseCase.name,
+    Class: AddLikeCommentUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          name: 'threadRepository',
+          internal: ThreadRepository.name,
+        },
+        {
+          name: 'commentRepository',
+          internal: CommentRepository.name,
         },
       ],
     },

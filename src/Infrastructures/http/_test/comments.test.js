@@ -288,4 +288,28 @@ describe('/threads/{threadId}/comments endpoint', () => {
       expect(responseJson.status).toEqual('success');
     });
   });
+
+  /** LIKES COMMENT ENDPOINT */
+  describe('when PUT /threads/{threadId}/comments/{commentId}/likes', () => {
+    it('should response 200 when comments likes successfully', async () => {
+      // Arrange
+      const server = await createServer(container);
+
+      // Action
+      const response = await server.inject({
+        method: 'PUT',
+        url: `/threads/${threadId}/comments/${commentId}/likes`,
+        headers: {
+          Authorization: `Bearer ${accessTokenUserB}`,
+        },
+      });
+      const comment = await CommentsTableTestHelper.findCommentById(commentId);
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(comment[0].likes).toHaveLength(1);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.status).toEqual('success');
+    });
+  });
 });

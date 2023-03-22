@@ -21,8 +21,7 @@ class GetThreadUseCase {
 
   _mapComments(resultComments, resultReplies) {
     return resultComments.map((comment) => {
-      const replies = resultReplies.filter((reply) => reply.thread_id === comment.thread_id).map((reply) => new ReplyToModel(reply));
-
+      const replies = resultReplies.filter((reply) => comment.id === reply.comment_id).map((reply) => new ReplyToModel(reply));
       return new CommentToModel(comment, replies);
     });
   }
