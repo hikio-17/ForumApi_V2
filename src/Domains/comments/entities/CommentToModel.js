@@ -30,11 +30,6 @@ class CommentToModel {
   _verifyReplies(replies) {
     replies.map((reply) => {
       if (typeof reply.id !== 'string' || typeof reply.username !== 'string' || typeof reply.date !== 'string' || typeof reply.content !== 'string' || typeof reply.content !== 'string') {
-        replies.forEach((reply) => {
-          if (reply instanceof ReplyToModel) {
-            throw new Error('REPLIES.NOT_MEET_DATA_TYPE_SPESIFICATION');
-          }
-        });
         throw new Error('REPLIES.NOT_MEET_DATA_TYPE_SPESIFICATION');
       }
     });

@@ -22,5 +22,7 @@ DomainErrorTranslator._directories = {
   'NEW_THREAD.TITLE_LIMIT_CHAR': new InvariantError('tidak dapat membuat thread baru karena karakter title melebihi batas limit'),
   'NEW_COMMENT.NOT_MEET_DATA_TYPE_SPESIFICATION': new InvariantError('comment harus berupa string'),
   'NEW_REPLY_COMMENT.NOT_MEET_DATA_TYPE_SPESIFICATION': new InvariantError('reply comment harus berupa string'),
+  'ADD_LIKE_COMMENT_USE_CASE.NOT_MEET_DATA_TYPE_SPESIFICATION': new InvariantError('add like comment harus berupa string'),
+  'REPLIES.NOT_MEET_DATA_TYPE_SPESIFICATION': new InvariantError('reply harus berupa string'),
 };
 module.exports = DomainErrorTranslator;

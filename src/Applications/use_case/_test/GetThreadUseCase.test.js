@@ -93,6 +93,7 @@ describe('GetThreadUseCase', () => {
             },
           ],
           content: 'sebuah comment',
+          likeCount: 0,
         },
       ],
     });

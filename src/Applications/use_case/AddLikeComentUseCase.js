@@ -13,7 +13,7 @@ class AddLikeCommentUseCase {
 
   _verifyParams(threadId, commentId, credentialId) {
     if (typeof threadId !== 'string' || typeof commentId !== 'string' || typeof credentialId !== 'string') {
-      throw new Error('ADD_LIKE_COMMENT_USE_CASE_NOT_MEET_DATA_TYPE_SPESIFICATION');
+      throw new Error('ADD_LIKE_COMMENT_USE_CASE.NOT_MEET_DATA_TYPE_SPESIFICATION');
     }
   }
 }

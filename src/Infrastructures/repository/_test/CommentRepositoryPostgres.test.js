@@ -72,16 +72,36 @@ describe('CommentRepositoryPostgres', () => {
       await CommentsTableTestHelper.addComment({ content: 'sebuah comment' }); // commentId = 'comment-1234'
       const commentId = 'comment-1234';
       const credentialId = 'user-123';
-      const fakeIdGenerator = () => '1234';
 
-      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, fakeIdGenerator);
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action
       await commentRepositoryPostgres.likesComments(commentId, credentialId);
-      const likeCount = await CommentsTableTestHelper.likesComments(commentId);
+      const comment = await CommentsTableTestHelper.findCommentById(commentId);
 
       // Assert
-      expect(likeCount).toHaveLength(1);
+      expect(comment).toHaveLength(1);
+      expect(comment[0].likes).toHaveLength(1);
+    });
+
+    it('should persist unlike comments and return value correctly', async () => {
+      // Arrange
+      await CommentsTableTestHelper.addComment({ content: 'sebuah comment' }); // commentId = 'comment-1234'
+      const commentId = 'comment-1234';
+      const credentialId = 'user-123';
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      await commentRepositoryPostgres.likesComments(commentId, credentialId); // user like comment
+      await commentRepositoryPostgres.likesComments(commentId, credentialId); // user unlike comment
+
+      const comment = await CommentsTableTestHelper.findCommentById(commentId);
+
+      // Assert
+
+      expect(comment).toHaveLength(1);
+      expect(comment.likes).toBeUndefined();
     });
   });
 
@@ -105,6 +125,7 @@ describe('CommentRepositoryPostgres', () => {
           created_at: '2023',
           content: 'sebuah comment',
           is_delete: false,
+          likes: null,
         }],
       );
     });
