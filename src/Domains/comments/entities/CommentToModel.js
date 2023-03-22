@@ -12,6 +12,7 @@ class CommentToModel {
     this.date = comment.created_at;
     this.replies = replies;
     this.content = this._displayContent(comment);
+    this.likeCount = comment.likes ? comment.likes.length : 0;
   }
 
   _displayContent(comment) {

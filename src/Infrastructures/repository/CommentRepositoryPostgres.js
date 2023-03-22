@@ -28,7 +28,7 @@ class CommentRepositoryPostgres extends CommentRepository {
 
   async getCommentByThreadId(threadId) {
     const query = {
-      text: 'SELECT comments.id, username, comments.created_at, comments.content, comments.is_delete FROM comments INNER JOIN users ON users.id = comments.owner WHERE comments.thread_id = $1',
+      text: 'SELECT comments.id, username, comments.created_at, comments.content, comments.is_delete, likes FROM comments INNER JOIN users ON users.id = comments.owner WHERE comments.thread_id = $1',
       values: [threadId],
     };
 
@@ -65,6 +65,31 @@ class CommentRepositoryPostgres extends CommentRepository {
     const { owner } = rows[0];
     if (rowCount && owner !== credentialId) {
       throw new AuthorizationError('Anda tidak berhak mengakses resource ini!');
+    }
+  }
+
+  async likesComments(commentId, credentialId) {
+    const queryCheckUserLike = {
+      text: 'SELECT * FROM comments WHERE id = $1 AND $2 = ANY(likes)',
+      values: [commentId, credentialId],
+    };
+    const { rowCount: userLike } = await this._pool.query(queryCheckUserLike);
+    if (!userLike) {
+      const query = {
+        text: 'UPDATE comments SET likes = array_append(likes, $1) WHERE id = $2',
+        values: [credentialId, commentId],
+      };
+      await this._pool.query(query);
+    }
+
+    if (userLike) {
+      const queryUserUnlike = {
+        text: 'UPDATE comments SET likes = array_remove(likes, $1) WHERE comments.id = $2',
+        values: [credentialId, commentId],
+      };
+
+      await this._pool.query(queryUserUnlike);
+      // console.log(commentId, credentialId);
     }
   }
 

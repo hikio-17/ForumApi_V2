@@ -66,6 +66,25 @@ describe('CommentRepositoryPostgres', () => {
     });
   });
 
+  describe('likesComments function', () => {
+    it('should persist add likes comments and return value correctly', async () => {
+      // Arrange
+      await CommentsTableTestHelper.addComment({ content: 'sebuah comment' }); // commentId = 'comment-1234'
+      const commentId = 'comment-1234';
+      const credentialId = 'user-123';
+      const fakeIdGenerator = () => '1234';
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, fakeIdGenerator);
+
+      // Action
+      await commentRepositoryPostgres.likesComments(commentId, credentialId);
+      const likeCount = await CommentsTableTestHelper.likesComments(commentId);
+
+      // Assert
+      expect(likeCount).toHaveLength(1);
+    });
+  });
+
   describe('getCommentByThreadId', () => {
     it('should persist get comment by threadId and return value correctly', async () => {
       // Arrange

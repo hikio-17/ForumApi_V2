@@ -1,7 +1,7 @@
 exports.up = (pgm) => {
   pgm.addColumn('comments', {
     likes: {
-      type: 'VARCHAR ARRAY',
+      type: 'VARCHAR(50) ARRAY',
     },
   });
 };

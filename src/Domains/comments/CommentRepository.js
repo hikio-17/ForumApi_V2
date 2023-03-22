@@ -16,6 +16,7 @@ class CommentRepository {
   }
 
   async likesComments(commentId, credentialId) {
+    console.log(commentId);
     throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 

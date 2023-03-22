@@ -32,6 +32,17 @@ const CommentsTableTestHelper = {
 
     await pool.query(query);
   },
+
+  async likesComments(commentId) {
+    const query = {
+      text: 'SELECT * FROM user_comment_likes WHERE comment_id = $1',
+      values: [commentId],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows;
+  },
 };
 
 module.exports = CommentsTableTestHelper;
