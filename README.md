@@ -8,29 +8,13 @@ Proyek ini merupakan API untuk aplikasi forum yang memungkinkan pengguna untuk m
 ## Teknologi yang Digunakan
 
 - Node.js
-- Express.js
-- Sequelize (ORM untuk koneksi dan manipulasi database)
-- MySQL (Database)
+- Hapi
+- Jest
+- PostgreSql (Database)
 - JSON Web Tokens (JWT) untuk autentikasi
-- Winston (Logger untuk mencatat aktivitas aplikasi)
 - Postman (Dokumentasi API)
-- Swagger (Dokumentasi API)
 
-## Deskripsi
 
-Aplikasi Laundry API menyediakan API (Application Programming Interface) untuk mengelola entitas pelanggan (customers) dan pesanan (orders) pada bisnis laundry. API ini dapat digunakan oleh aplikasi frontend, aplikasi mobile, atau klien lain yang membutuhkan akses ke data laundry.
-
-Aplikasi ini dibangun dengan menggunakan framework Express.js dan Sequelize untuk menghubungkan dan memanipulasi data pada database MySQL. Autentikasi dilakukan menggunakan JSON Web Tokens (JWT), sehingga setiap permintaan API harus menyertakan token yang valid untuk mendapatkan akses.
-
-Selain itu, aplikasi ini telah dilengkapi dengan fitur logger menggunakan Winston. Logger ini berguna untuk mencatat aktivitas dan informasi penting dalam aplikasi, sehingga memudahkan pemantauan dan pemecahan masalah.
-
-## Fitur
-
-- API untuk CRUD (Create, Read, Update, Delete) pada entitas pelanggan (customers) dan pesanan (orders).
-- Autentikasi menggunakan JSON Web Tokens (JWT).
-- Setiap permintaan API harus menyertakan token untuk akses.
-- API untuk login dan sign up pengguna.
-- Fitur logger dengan Winston untuk mencatat aktivitas aplikasi.
 ## Instalasi dan Penggunaan
 
 1. Clone repositori ini:
@@ -86,11 +70,15 @@ Proyek ini mencakup pengujian otomatis menggunakan Jest. Tes dapat ditemukan di 
 ```
 
 Tes ini mencakup berbagai fungsionalitas API untuk memastikan bahwa semuanya berfungsi seperti yang diharapkan dan untuk mendeteksi adanya regresi saat melakukan perubahan.
+
+
 ## Integrasi dan Penyebaran Berkelanjutan
 
 Proyek ini dikonfigurasi untuk integrasi dan penyebaran berkelanjutan (CI/CD) menggunakan GitHub Actions. Alur kerja CI/CD dikonfigurasi untuk menjalankan pengujian otomatis setiap kali ada push ke repositori dan untuk mendeploy API ke lingkungan produksi jika pengujian berhasil.
 
 Alur kerja CI/CD dapat ditemukan di direktori .github/workflows. Alur kerja tersebut mencakup langkah-langkah yang diperlukan untuk membangun, menguji, dan mendeploy aplikasi menggunakan konfigurasi yang ditentukan.
+
+
 ## Dokumentasi API
 
 - Dokumentasi API dapat ditemukan di [Postman](https://documenter.getpostman.com/view/20149138/2s93zB51po)
@@ -98,7 +86,6 @@ Alur kerja CI/CD dapat ditemukan di direktori .github/workflows. Alur kerja ters
 ## Lisensi
 
 Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
-
 
 
 ## Penulis
