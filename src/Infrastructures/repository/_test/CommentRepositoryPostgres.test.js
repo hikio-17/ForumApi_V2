@@ -66,6 +66,45 @@ describe('CommentRepositoryPostgres', () => {
     });
   });
 
+  describe('likesComments function', () => {
+    it('should persist add likes comments and return value correctly', async () => {
+      // Arrange
+      await CommentsTableTestHelper.addComment({ content: 'sebuah comment' }); // commentId = 'comment-1234'
+      const commentId = 'comment-1234';
+      const credentialId = 'user-123';
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      await commentRepositoryPostgres.likesComments(commentId, credentialId);
+      const comment = await CommentsTableTestHelper.findCommentById(commentId);
+
+      // Assert
+      expect(comment).toHaveLength(1);
+      expect(comment[0].likes).toHaveLength(1);
+    });
+
+    it('should persist unlike comments and return value correctly', async () => {
+      // Arrange
+      await CommentsTableTestHelper.addComment({ content: 'sebuah comment' }); // commentId = 'comment-1234'
+      const commentId = 'comment-1234';
+      const credentialId = 'user-123';
+
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      // Action
+      await commentRepositoryPostgres.likesComments(commentId, credentialId); // user like comment
+      await commentRepositoryPostgres.likesComments(commentId, credentialId); // user unlike comment
+
+      const comment = await CommentsTableTestHelper.findCommentById(commentId);
+
+      // Assert
+
+      expect(comment).toHaveLength(1);
+      expect(comment.likes).toBeUndefined();
+    });
+  });
+
   describe('getCommentByThreadId', () => {
     it('should persist get comment by threadId and return value correctly', async () => {
       // Arrange
@@ -86,6 +125,7 @@ describe('CommentRepositoryPostgres', () => {
           created_at: '2023',
           content: 'sebuah comment',
           is_delete: false,
+          likes: null,
         }],
       );
     });
